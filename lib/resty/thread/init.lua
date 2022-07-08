@@ -1,4 +1,4 @@
-local factory = require "resty.thread.fatcory"
+local factory = require "resty.thread.factory"
 
 local _VERSION = "0.1.0"
 
