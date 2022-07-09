@@ -11,6 +11,10 @@ easy use to ngx.run_worker_thread, none block
   - [run_worker_thread()](#run_worker_thread)
   - [run_with_upvalues()](#run_with_upvalues)
   - [set_upvalues_maxlimit](#set_upvalues_maxlimit)
+- [check_error](#check_error)
+  - [check_error.run](#check_errorrun)
+  - [check_error.run_with_upvalues](#check_errorrun_with_upvalues)
+  - [check_error.run_worker_thread](#check_errorrun_worker_thread)
 
 ## Description
 
@@ -25,7 +29,7 @@ note: function must without up values.
 
 ### run_worker_thread()
 
-is same as `ngx.run_worker_thread`.
+it's same as `ngx.run_worker_thread`.
 
 ### run_with_upvalues()
 
@@ -39,3 +43,28 @@ note: `upvalues list` must doesn't include
 ### set_upvalues_maxlimit
 
 function `run_with_upvalues` serialize upvalues level limit.
+
+## check_error
+
+throw error if pass invaild args. it's same as
+
+```lua
+  local th = require('resty.thread')
+  local ok, re1, re2, ... = th.check_error.run(...)
+  if ok then
+    error(re1)
+  end
+  return re1, re2, ...
+```
+
+### check_error.run
+
+it's same as `run`, just check runtime error
+
+### check_error.run_with_upvalues
+
+it's same as `run_with_upvalues`, just check runtime error
+
+### check_error.run_worker_thread
+
+it's same as `run_worker_thread`, just check runtime error

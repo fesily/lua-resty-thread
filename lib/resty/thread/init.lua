@@ -22,10 +22,31 @@ function _M.run_with_upvalues(threadpool, fn, arg1, ...)
     return factory.create_with_upvalues(threadpool, fn, arg1, ...)
 end
 
+_M.run_worker_thread = ngx.run_worker_thread
+
+local function check_result(ok, err, ...)
+    if not ok then
+        error(err, 3)
+    end
+    return err, ...
+end
+
+_M.check_error = {}
+
+function _M.check_error.run(threadpool, fn, arg1, ...)
+    return check_result(_M.run(threadpool, fn, arg1, ...))
+end
+
+function _M.check_error.run_with_upvalues(threadpool, fn, arg1, ...)
+    return check_result(_M.run_with_upvalues(threadpool, fn, arg1, ...))
+end
+
+function _M.check_error.run_worker_thread(threadpool, fn, arg1, ...)
+    return check_result(_M.run_worker_thread(threadpool, fn, arg1, ...))
+end
+
 function _M.set_upvalues_maxlimit(n)
     upvalues.maxlimit = n
 end
-
-_M.run_worker_thread = ngx.run_worker_thread
 
 return _M
