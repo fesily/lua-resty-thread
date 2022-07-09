@@ -1,6 +1,6 @@
 local factory = require "resty.thread.factory"
 local upvalues = require "resty.thread.upvalues"
-local _VERSION = "0.2.0"
+local _VERSION = "0.3.0"
 
 local _M = {}
 
