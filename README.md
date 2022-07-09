@@ -9,6 +9,8 @@ easy use to ngx.run_worker_thread, none block
 - [Public Functions](#public-functions)
   - [run()](#run)
   - [run_worker_thread()](#run_worker_thread)
+  - [run_with_upvalues()](#run_with_upvalues)
+  - [set_upvalues_maxlimit](#set_upvalues_maxlimit)
 
 ## Description
 
@@ -19,8 +21,21 @@ wrapper `ngx.run_worker_thread` api, and support normally io api, like `file`.
 ### run()
 
 pass callback function to `ngx.run_worker_thread` without create a new file.
-note: must function must without up values.
+note: function must without up values.
 
 ### run_worker_thread()
 
 is same as `ngx.run_worker_thread`.
+
+### run_with_upvalues()
+
+pass callback function to `ngx.run_worker_thread` without create a new file.
+note: `upvalues list` must doesn't include
+
+- thread
+- userdata
+- c function
+
+### set_upvalues_maxlimit
+
+function `run_with_upvalues` serialize upvalues level limit.

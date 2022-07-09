@@ -1,5 +1,5 @@
 local factory = require "resty.thread.factory"
-
+local upvalues = require "resty.thread.upvalues"
 local _VERSION = "0.1.0"
 
 local _M = {}
@@ -13,6 +13,17 @@ function _M.run(threadpool, fn, arg1, ...)
         return false, "fn must not have up values:" .. nups
     end
     return factory.create(threadpool, fn, arg1, ...)
+end
+
+function _M.run_with_upvalues(threadpool, fn, arg1, ...)
+    if type(fn) ~= "function" then
+        return false, "fn is not a function"
+    end
+    return factory.create_with_upvalues(threadpool, fn, arg1, ...)
+end
+
+function _M.set_upvalues_maxlimit(n)
+    upvalues.maxlimit = n
 end
 
 _M.run_worker_thread = ngx.run_worker_thread
