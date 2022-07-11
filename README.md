@@ -66,6 +66,12 @@ note:
 
 - if flag `support_thread` is false, return a wrapper object which all api will call functions in current thread.
 - if thread pool is invalid, will return `nil, error message`
+  
+| Filed        | Name              | Lua Type  | Description                                                            |
+| ------------ | ----------------- | --------- | ---------------------------------------------------------------------- |
+| Parameter    | `threadpool_name` | string    | thread pool name                                                       |
+| Parameter    | `no_check`        | boolean   | set `true` will return wrapper object when thread pool is not invaild. |
+| Return Value | `handle`          | table/nil | instance reference                                                     |
 
 ### support_thread
 

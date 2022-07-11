@@ -41,9 +41,13 @@ function _M.set_upvalues_maxlimit(n)
     return upvalues.set_upvalues_maxlimit(n)
 end
 
-function _M.new(threadpool_name)
+function _M.new(threadpool_name, no_check)
     if _M.support_thread then
-        return require("resty.thread.new").new(threadpool_name)
+        local t, err = require("resty.thread.new").new(threadpool_name)
+        if t == nil and no_check then
+            return wrapper.new(threadpool_name)
+        end
+        return t, err
     end
     return wrapper.new(threadpool_name)
 end
