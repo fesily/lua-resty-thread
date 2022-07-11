@@ -1,8 +1,10 @@
 local factory = require "resty.thread.factory"
 local upvalues = require "resty.thread.upvalues"
-local _VERSION = "0.4.0"
+local _VERSION = "0.4.1"
 
 local _M = {}
+
+_M.support_thread = ngx.run_worker_thread ~= nil
 
 function _M.run(threadpool, fn, arg1, ...)
     if type(fn) ~= "function" then
