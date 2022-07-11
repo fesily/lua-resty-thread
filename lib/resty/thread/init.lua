@@ -1,6 +1,7 @@
 local factory = require "resty.thread.factory"
 local upvalues = require "resty.thread.upvalues"
-local _VERSION = "0.4.1"
+local wrapper = require "resty.thread.wrapper"
+local _VERSION = "0.5.0"
 
 local _M = {}
 
@@ -48,11 +49,14 @@ function _M.check_error.run_worker_thread(threadpool, fn, arg1, ...)
 end
 
 function _M.set_upvalues_maxlimit(n)
-    upvalues.maxlimit = n
+    return upvalues.set_upvalues_maxlimit(n)
 end
 
 function _M.new(threadpool_name)
-    return require("resty.thread.new").new(threadpool_name)
+    if _M.support_thread then
+        return require("resty.thread.new").new(threadpool_name)
+    end
+    return wrapper.new(threadpool_name)
 end
 
 return _M

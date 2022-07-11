@@ -13,6 +13,11 @@ end
 local _M = {}
 
 _M.maxlimit = 4
+
+function _M.set_upvalues_maxlimit(n)
+    _M.maxlimit = n
+end
+
 local serialize_upvalues
 local function serialize_func(fn, limit)
     local ok, result = pcall(string.dump, fn)
