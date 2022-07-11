@@ -11,6 +11,7 @@ easy use to ngx.run_worker_thread, none block
   - [run_worker_thread()](#run_worker_thread)
   - [run_with_upvalues()](#run_with_upvalues)
   - [set_upvalues_maxlimit](#set_upvalues_maxlimit)
+  - [new](#new)
 - [check_error](#check_error)
   - [check_error.run](#check_errorrun)
   - [check_error.run_with_upvalues](#check_errorrun_with_upvalues)
@@ -43,6 +44,10 @@ note: `upvalues list` must doesn't include
 ### set_upvalues_maxlimit
 
 function `run_with_upvalues` serialize upvalues level limit.
+
+### new
+
+banding argument `threadpool_name`, all functions is same as `resty.thread` except no first argument.
 
 ## check_error
 

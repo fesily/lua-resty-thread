@@ -1,0 +1,13 @@
+describe("new", function()
+    describe("thread.new", function()
+        local thread_new = require("resty.thread.new")
+        local th = thread_new.new("testpool")
+        it("hello", function()
+            local ok, s = th:run(function(d)
+                return d
+            end, "hello")
+            assert.is_true(ok, s)
+            assert.is_equal(s, 'hello')
+        end)
+    end)
+end)

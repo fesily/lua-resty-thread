@@ -1,6 +1,6 @@
 local factory = require "resty.thread.factory"
 local upvalues = require "resty.thread.upvalues"
-local _VERSION = "0.3.0"
+local _VERSION = "0.4.0"
 
 local _M = {}
 
@@ -47,6 +47,10 @@ end
 
 function _M.set_upvalues_maxlimit(n)
     upvalues.maxlimit = n
+end
+
+function _M.new(threadpool_name)
+    return require("resty.thread.new").new(threadpool_name)
 end
 
 return _M
