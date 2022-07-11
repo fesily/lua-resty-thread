@@ -1,10 +1,10 @@
-require 'busted.runner' ({ standalone = false })
-local upvalues = require "resty.thread.upvalues"
 describe("upvalues", function()
+    local upvalues = require "resty.thread.upvalues"
     it("c function", function()
         local ffi = require "ffi"
         local uv, err = upvalues.serialize(function() return ffi.new end)
         assert.is_nil(uv, err)
+        -- err may be 'unsupport type thread, userdata'
         assert.is_equal(err, "unable to dump given function" .. ' maybe a c function')
     end)
     it("function", function()

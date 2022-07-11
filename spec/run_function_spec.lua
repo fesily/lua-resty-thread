@@ -1,5 +1,5 @@
-local th = require "resty.thread"
 describe("resty.thread", function()
+    local th = require "resty.thread"
     describe("run", function()
         it("hello", function()
             local ok, s = th.run('testpool', function(d)
