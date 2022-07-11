@@ -62,7 +62,10 @@ function `run_with_upvalues` serialize upvalues level limit.
 
 banding argument `threadpool_name`, all functions is same as `resty.thread` except no first argument.
 
-note: if flag `support_thread` is false, return a wrapper object which all api will call functions in current thread
+note:
+
+- if flag `support_thread` is false, return a wrapper object which all api will call functions in current thread.
+- if thread pool is invalid, will return `nil, error message`
 
 ### support_thread
 
