@@ -7,6 +7,7 @@ easy use to ngx.run_worker_thread, none block
 - [lua-resty-thread](#lua-resty-thread)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
+  - [diffrence result](#diffrence-result)
   - [Public Functions](#public-functions)
     - [run()](#run)
     - [run_worker_thread()](#run_worker_thread)
@@ -14,14 +15,22 @@ easy use to ngx.run_worker_thread, none block
     - [set_upvalues_maxlimit](#set_upvalues_maxlimit)
     - [new](#new)
     - [support_thread](#support_thread)
-  - [check_error](#check_error)
-    - [check_error.run](#check_errorrun)
-    - [check_error.run_with_upvalues](#check_errorrun_with_upvalues)
-    - [check_error.run_worker_thread](#check_errorrun_worker_thread)
 
 ## Description
 
 wrapper `ngx.run_worker_thread` api, and support normally io api, like `file`.
+
+## diffrence result
+
+convert result if runtime error return, it's like this:
+
+```lua
+  local ok, r1, ... = thread.run(...)
+  if not ok then
+      return nil, r1
+  end
+  return r1, ...
+```
 
 ## Public Functions
 
@@ -57,29 +66,4 @@ note: if flag `support_thread` is false, return a wrapper object which all api w
 
 ### support_thread
 
-flag whether this function is supported
-
-## check_error
-
-throw error if pass invaild args. it's same as
-
-```lua
-  local th = require('resty.thread')
-  local ok, re1, re2, ... = th.check_error.run(...)
-  if ok then
-    error(re1)
-  end
-  return re1, re2, ...
-```
-
-### check_error.run
-
-it's same as `run`, just check runtime error
-
-### check_error.run_with_upvalues
-
-it's same as `run_with_upvalues`, just check runtime error
-
-### check_error.run_worker_thread
-
-it's same as `run_worker_thread`, just check runtime error
+flag whether this function is supported.

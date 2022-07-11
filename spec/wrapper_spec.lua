@@ -12,10 +12,9 @@ describe("disable ngx.run_worker_thread", function()
         end)
         it("run", function()
             local ffi = require "ffi"
-            local ok, r, r2 = th:run(function()
+            local r, r2 = th:run(function()
                 return ffi, "ddd"
             end)
-            assert.is_true(ok)
             assert.is_equal(ffi, r)
             assert.is_equal(r2, 'ddd')
         end)
