@@ -2,7 +2,7 @@ local factory = require "resty.thread.factory"
 local upvalues = require "resty.thread.upvalues"
 local wrapper = require "resty.thread.wrapper"
 local run_worker_thread = ngx.run_worker_thread
-local _VERSION = "0.6.1"
+local _VERSION = "0.6.2"
 
 local _M = {}
 

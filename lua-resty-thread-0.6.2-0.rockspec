@@ -1,5 +1,5 @@
 package = "lua-resty-thread"
-version = "0.6.1-0"
+version = "0.6.2-0"
 source = {
    url = "git://github.com/fesily/lua-resty-thread.git"
 }
@@ -16,5 +16,8 @@ build = {
       ["resty.thread.init"] = "lib/resty/thread/init.lua",
       ["resty.thread.factory"] = "lib/resty/thread/factory.lua",
       ["resty.thread.upvalues"] = "lib/resty/thread/upvalues.lua",
+      ["resty.thread.new"] = "lib/resty/thread/new.lua",
+      ["resty.thread.ngx_threadpool"] = "lib/resty/thread/ngx_threadpool.lua",
+      ["resty.thread.wrapper"] = "lib/resty/thread/wrapper.lua",
    }
 }
