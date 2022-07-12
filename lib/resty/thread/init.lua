@@ -2,7 +2,7 @@ local factory = require "resty.thread.factory"
 local upvalues = require "resty.thread.upvalues"
 local wrapper = require "resty.thread.wrapper"
 local run_worker_thread = ngx.run_worker_thread
-local _VERSION = "0.6.2"
+local _VERSION = "0.6.4"
 
 local _M = {}
 
@@ -34,7 +34,7 @@ function _M.run_with_upvalues(threadpool, fn, arg1, ...)
 end
 
 function _M.run_worker_thread(threadpool, fn, arg1, ...)
-    return check_result(run_worker_thread(threadpool,fn, arg1, ...))
+    return check_result(run_worker_thread(threadpool, fn, arg1, ...))
 end
 
 function _M.set_upvalues_maxlimit(n)
@@ -42,14 +42,17 @@ function _M.set_upvalues_maxlimit(n)
 end
 
 function _M.new(threadpool_name, no_check)
-    if _M.support_thread then
-        local t, err = require("resty.thread.new").new(threadpool_name)
-        if t == nil and no_check then
-            return wrapper.new(threadpool_name)
-        end
-        return t, err
+    if not _M.support_thread then
+        return wrapper.new(threadpool_name)
     end
-    return wrapper.new(threadpool_name)
+    local t, err = require("resty.thread.new").new(threadpool_name)
+    if t ~= nil then
+        return t
+    end
+    if no_check then
+        return wrapper.new(threadpool_name)
+    end
+    return nil, err
 end
 
 _M.chekc_result = check_result

@@ -1,5 +1,5 @@
 package = "lua-resty-thread"
-version = "0.6.2-0"
+version = "0.6.4-0"
 source = {
    url = "git://github.com/fesily/lua-resty-thread.git"
 }
